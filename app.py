@@ -39,7 +39,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def index():
-    return "API de charadas está funcionando!", 200
+    return "API de charadas TA ON PAPAE!", 200
 
 @app.route('/charadas', methods=['GET'])
 def charada():
