@@ -1,7 +1,10 @@
-from flask import Flask, jsonify
+from flask import Flask, render_template, redirect, url_for
 import random
 
-charadas = [
+app = Flask(__name__)
+
+# Lista de charadas sobre futebol
+charadas_futebol = [
     {"id": 1, "charada": "Por que o Palmeiras não pode ser relojoeiro? Porque sempre fica esperando o momento certo para ganhar, mas o tempo nunca chega!"},
     {"id": 2, "charada": "O que o Corinthians faz quando a bola não entra? Chama o VAR e pede replay do último título... do século passado!"},
     {"id": 3, "charada": "Qual é a diferença entre o Flamengo e o Sherlock Holmes? O Sherlock resolve mistérios, e o Flamengo... só fica perdido na final!"},
@@ -34,24 +37,18 @@ charadas = [
     {"id": 30, "charada": "O que é, o que é: tem uma torcida enorme, mas nunca consegue ganhar títulos internacionais? O Botafogo!"}
 ]
 
-
-app = Flask(__name__)
-
-@app.route('/', methods=['GET'])
+@app.route('/')
 def index():
-    return "API de charadas está funcionando!", 200
+    # Escolhe uma charada aleatória
+    charada_aleatoria = random.choice(charadas_futebol)
+    return render_template('index.html', charada=charada_aleatoria)
 
-@app.route('/charadas', methods=['GET'])
-def charada():
-    charada = random.choice(charadas)
-    return charada, 200
-    
-@app.route('/charadas/<int:id>', methods=['GET'])
-def busca(id):
-    for charada in charadas:
-        if charada["id"] == id:
-            return charada, 200
-    return "Charada não encontrada", 404
+@app.route('/nova_charada')
+def nova_charada():
+    # Escolhe uma nova charada aleatória
+    charada_aleatoria = random.choice(charadas_futebol)
+    return render_template('index.html', charada=charada_aleatoria)
 
 if __name__ == '__main__':
-    app.run(port=5001)
+    # Define a porta como 5003
+    app.run(debug=True, port=5003)
