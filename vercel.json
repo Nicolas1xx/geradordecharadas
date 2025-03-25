@@ -8,8 +8,17 @@
     ],
     "routes": [
       {
+        "src": "/",
+        "dest": "/app.py"
+      },
+      {
+        "src": "/nova_charada",
+        "dest": "/app.py"
+      },
+      {
         "src": "/(.*)",
-        "dest": "app.py"
+        "dest": "/app.py"
       }
     ]
   }
+  
