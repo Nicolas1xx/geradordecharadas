@@ -43,8 +43,6 @@ def charada_aleatoria():
     else:
         return jsonify({"error": "Nenhuma charada encontrada"}), 404
 
-    return jsonify(charada_aleatoria)
-
 
 #---------MÉTODO GET - CHARADA POR ID   ---------#
 @app.route('/charadas/<id>', methods=['GET'])
@@ -61,6 +59,7 @@ def busca(id):
 #---------MÉTODO POST - ADICIONAR CHARADAS---------#
 @app.route('/charadas', methods=['POST'])
 def adicionar_charada():
+    print("entrou no post")
     dados = request.json
 
     if "pergunta" in dados and "resposta" not in dados:
